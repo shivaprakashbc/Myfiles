@@ -1,0 +1,40 @@
+How to docker images:
+---------------------
+
+sudo su -
+docker pull golang
+docker images
+docker tag golang:latest bcsprakash/golang
+docker push bcsprakash/golang
+docker login
+docker push bcsprakash/golang
+
+
+
+
+
+How to pull an image, create a container & push it to our docker repo
+---------------------------------------------------------------------
+docker images
+docker pull ubuntu
+docker images
+docker run -itd ubuntu  ## 'itd' stands for interactive terminal detached
+docker ps          ## 'ps' stands for process status
+docker exec -it 1caa947624cb /bin/bash
+docker commit 1caa947624cb ubuntunew
+docker images
+docker container ls
+docker tag ubuntunew:latest bcsprakash/ubuntunew
+docker push bcsprakash/ubuntunew
+
+docker container prune   ## To remove all stopped containers
+(https://linuxize.com/post/how-to-remove-docker-images-containers-volumes-and-networks/)
+
+docker container ls -aq ## docker container ls -aq
+docker container stop $(docker container ls -aq)  ##To stop all running containers, enter the docker container stop command followed by the containers IDs
+docker container rm $(docker container ls -aq)  ## Once all containers are stopped, remove them using the docker container rm command, followed by the containers ID list.
+
+diff b/w Docker run -it <image-name>and docker run -itd <image-name>
+---------------------------------------------------------------------
+-it : we enter into the image
+-itd : we create a running instance of the image

@@ -1,0 +1,33 @@
+Master Slave Configuration
+-------------------------
+
+1) Slave Config
+
+sudo su -
+useradd -d /home/slave1 -m slave1  ## for creating a user slave1 &  a directory for the same user
+sudo su - slave1
+ssh-keygen -t rsa -N "" -f /home/slave1/.ssh/id_rsa
+cd .ssh
+cat id_rsa.pub >> authorized_keys
+chmod 700 authorized_keys
+
+
+2) Master Config
+
+sudo su -
+mkdir -p /var/lib/jenkins/.ssh
+cd /var/lib/jenkins/.ssh
+ssh-keyscan -H slavenodeprivateIPaddress >> /var/lib/jenkins/.ssh/known_hosts
+ls
+chown jenkins:jenkins /var/lib/jenkins/.ssh/known_hosts
+chmod 700 known_hosts
+ 
+3) Go to manage jenkins > manage nodes > permenant agent > no. of executors 2 > root directory /home/slave1/jenkins ( creating a jenkins folder in slave 1) >
+    > add credentials  (ssh using private key, copy private key id_rsa of slave1) > select name in credentials >  known hosts verification stratergy > 
+    save  
+
+   Note :  1) Hostname is private IP address of slave
+           2) username is slave name
+
+
+ 

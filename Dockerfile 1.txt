@@ -1,0 +1,21 @@
+Build
+------
+FROM ubuntu:latest
+RUN apt-get update -y
+RUN apt install apt-utils -y
+RUN apt-get install default-jdk -y
+RUN apt-get install maven -y
+RUN apt-get install git -y
+RUN rm -rf hello-world-war
+RUN git clone https://github.com/shivaprakashbc/hello-world-war.git
+#Set working directory
+WORKDIR hello-world-war
+RUN mvn clean package
+CMD ["pwd"]
+
+Deploy
+-------
+RUN apt-get update -y
+FROM tomcat
+COPY hello-world-war-1.0.0.war  ./webapps
+EXPOSE 8080
