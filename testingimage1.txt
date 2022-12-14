@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    parameters {
+      string defaultValue: '\'etcd_proxy\',\'squid\',\'monitoring\'', description: 'Docker Image to test', name: 'IMAGE'
+      choice choices: ['dev', 'prod', 'SIT'], description: 'environment', name: 'ENVIRON'
+                }
+    stages {
+        stage('build') {
+            when { 
+                expression { params.IMAGE == 'monitoring'}
+                expression { params.ENVIRON == 'dev' }
+                }
+            steps {
+                echo " monitor building in ${ENVIRON}" 
+                }
+
+    
+        }
+    }
+}
