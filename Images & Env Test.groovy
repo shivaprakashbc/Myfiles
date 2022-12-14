@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     switch(params.ENV) {
-                        case "Dev": echo "image1 testing in dev"; break
+                        case "Dev": echo "image1 testing in dev env"; break
                         case "Prod": echo "image1 testing in Prod"; break
                         case "QA": echo "image1 testing in QA"; break
                     }
